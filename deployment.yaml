@@ -1,0 +1,21 @@
+# deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:  private-registry-deployment
+  namespace: portal
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: private-registry
+  template:
+    metadata:
+      labels:
+        app: private-registry
+    spec:
+      containers:
+      - name: private-registry-container
+        image: myregistry:5000/yourusername/myapp:latest
+        ports:
+        - containerPort: 80
